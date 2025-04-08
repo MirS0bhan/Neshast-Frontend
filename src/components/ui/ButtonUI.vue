@@ -20,6 +20,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import '@/assets/theme.css'
 
 const props = defineProps<{
   variant?: 'primary' | 'secondary' | 'outline' | 'danger'
@@ -35,14 +36,8 @@ const {
   disabled = false,
 } = props
 
-const base = 'inline-flex items-center justify-center font-medium rounded-2xl transition duration-200 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed'
-
-const variantClasses = {
-  primary: 'bg-blue-600 text-white hover:bg-blue-700',
-  secondary: 'bg-gray-100 text-gray-800 hover:bg-gray-200',
-  outline: 'border border-gray-300 text-gray-800 hover:bg-gray-100',
-  danger: 'bg-red-600 text-white hover:bg-red-700',
-}
+const baseClasses =
+  'inline-flex items-center justify-center font-medium rounded-2xl transition duration-200 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed'
 
 const sizeClasses = {
   sm: 'px-3 py-1.5 text-sm',
@@ -50,7 +45,18 @@ const sizeClasses = {
   lg: 'px-5 py-3 text-lg',
 }
 
+const variantClasses = {
+  primary: 'bg-[rgb(var(--color-primary))] text-white hover:bg-[rgb(var(--color-primary)/0.5)]',
+  secondary: 'bg-[rgb(var(--color-secondary))] text-white hover:bg-[rgb(var(--color-secondary)/0.8)]',
+  danger: 'bg-[rgb(var(--color-danger))] text-white hover:bg-[rgb(var(--color-danger)/0.8)]',
+  outline: 'border border-gray-300 text-gray-800 hover:bg-gray-100',
+}
+
 const computedClasses = computed(() => {
-  return [base, variantClasses[variant], sizeClasses[size]].join(' ')
+  return [
+    baseClasses,
+    sizeClasses[size],
+    variantClasses[variant],
+  ].join(' ')
 })
 </script>

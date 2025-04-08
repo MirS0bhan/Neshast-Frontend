@@ -13,7 +13,7 @@
 ---
 
 ## 🧩 Buttons
-- [ ] `Button.vue` – base button with variants (primary, secondary, etc.)
+- [x] `Button.vue` – base button with variants (primary, secondary, etc.)
 - [ ] `IconButton.vue` – icon-only button, round or square
 - [ ] `ButtonGroup.vue` – grouped button styles for filters/actions
 
