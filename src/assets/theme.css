@@ -1,0 +1,12 @@
+/* theme.css */
+:root {
+  --color-primary: 59 130 246;
+  --color-secondary: 107 114 128;
+  --color-danger: 239 68 68;
+}
+
+.dark {
+  --color-primary: 30 64 175;
+  --color-secondary: 55 65 81;
+  --color-danger: 185 28 28;
+}
