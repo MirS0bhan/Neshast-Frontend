@@ -1,19 +1,18 @@
 import HomePage from '@/pages/HomePage.vue'
-import LoginPage from '@/pages/Auth/LoginPage.vue'
 
-import SignupPage from '@/pages/Auth/SignupPage.vue'
 import AboutPage from '@/pages/AboutPage.vue'
-import { createMemoryHistory, createRouter } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
+import AuthPage from '@/pages/AuthPage.vue'
 
 const routes = [
   { path: '/', component: HomePage },
-  { path: '/auth/login', component: LoginPage },
-  { path: '/auth/signup', component: SignupPage },
+  { path: '/auth/login', component: AuthPage },
+  { path: '/auth/signup', component: AuthPage },
   { path: '/about', component: AboutPage },
 ]
 
 const router = createRouter({
-  history: createMemoryHistory(),
+  history: createWebHistory(),
   routes,
 })
 
