@@ -37,7 +37,7 @@ const {
 } = props
 
 const baseClasses =
-  'inline-flex items-center justify-center font-medium rounded-2xl transition duration-200 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed'
+  'inline-flex items-center justify-center font-medium rounded-md transition duration-200 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed'
 
 const sizeClasses = {
   sm: 'px-3 py-1.5 text-sm',
