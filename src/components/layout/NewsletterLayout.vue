@@ -1,3 +1,8 @@
+<script setup lang="ts">
+import ButtonUI from '../ui/ButtonUI.vue';
+
+</script>
+
 <template>
   <section class="bg-gray-100 py-16">
     <div class="container mx-auto px-4 text-center">
@@ -11,7 +16,7 @@
           placeholder="ایمیل شما"
           class="flex-grow rounded-md border border-gray-300 px-4 py-2"
         />
-        <button class="bg-gold hover:bg-gold-dark rounded px-6 py-2 text-gray-800">عضویت</button>
+        <ButtonUI variant="outline">عضویت</ButtonUI>
       </div>
     </div>
   </section>
