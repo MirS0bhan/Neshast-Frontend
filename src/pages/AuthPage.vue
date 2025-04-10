@@ -1,8 +1,8 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-[rgb(var(--color-primary))]">
-    <div class="w-full max-w-lg rounded-2xl p-6 max-h-10/12">
+  <div class="flex min-h-screen items-center justify-center bg-[rgb(var(--color-primary))]">
+    <div class="max-h-10/12 w-full max-w-lg rounded-2xl p-6">
       <TabsRoot v-model="activeTab">
-        <TabsList class=" bg-white grid grid-cols-2 mb-6 p-4 rounded-2xl">
+        <TabsList class="mb-6 grid grid-cols-2 rounded-2xl bg-white p-4">
           <TabsTrigger value="login">Login</TabsTrigger>
           <TabsTrigger value="signup">Sign Up</TabsTrigger>
         </TabsList>
@@ -22,17 +22,14 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import '@/assets/theme.css'
-
+import { getLastSlug } from '@/utils/utils'
 // reka-ui Tabs
-import {
-  TabsRoot,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
-} from 'reka-ui'
+import { TabsRoot, TabsList, TabsTrigger, TabsContent } from 'reka-ui'
 
 import LoginView from '#/layout/LoginLayout.vue'
 import SignupView from '#/layout/SignupLayout.vue'
+import { useRoute } from 'vue-router'
 
-const activeTab = ref('login')
+const route = useRoute()
+const activeTab = ref< 'login' | 'signup' | undefined >(getLastSlug(route.path))
 </script>
