@@ -1,39 +1,31 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-gray-100">
-    <div class="w-full max-w-md bg-white p-6 rounded-2xl shadow-lg">
-      <h2 class="text-2xl font-bold mb-6 text-center">Login to your account</h2>
+  <div class="w-full max-w-lg rounded-2xl bg-white p-6 shadow-lg">
+    <h2 class="mb-6 text-center text-2xl font-bold">Login to your account</h2>
 
-      <form @submit.prevent="handleLogin" class="space-y-4">
-        <InputUI
-          v-model="email"
-          label="Email"
-          type="email"
-          placeholder="you@example.com"
-          :error="errorField === 'email' ? errorMessage : ''"
-        />
+    <form @submit.prevent="handleLogin" class="space-y-4">
+      <InputUI
+        v-model="email"
+        label="Email"
+        type="email"
+        placeholder="you@example.com"
+        :error="errorField === 'email' ? errorMessage : ''"
+      />
 
-        <InputUI
-          v-model="password"
-          label="Password"
-          type="password"
-          placeholder="••••••••"
-          :error="errorField === 'password' ? errorMessage : ''"
-        />
+      <InputUI
+        v-model="password"
+        label="Password"
+        type="password"
+        placeholder="••••••••"
+        :error="errorField === 'password' ? errorMessage : ''"
+      />
 
-        <ButtonUI
-          :loading="loading"
-          class="w-full"
-          type="submit"
-        >
-          Login
-        </ButtonUI>
-      </form>
+      <ButtonUI :loading="loading" class="w-full" type="submit"> Login </ButtonUI>
+    </form>
 
-      <p class="mt-4 text-center text-sm text-gray-600">
-        Don’t have an account?
-        <RouterLink to="/register" class="text-blue-600 hover:underline">Sign up</RouterLink>
-      </p>
-    </div>
+    <p class="mt-4 text-center text-sm text-gray-600">
+      Don’t have an account?
+      <RouterLink to="/register" class="text-blue-600 hover:underline">Sign up</RouterLink>
+    </p>
   </div>
 </template>
 

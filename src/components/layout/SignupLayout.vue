@@ -1,40 +1,38 @@
 <template>
-  <div class="flex min-h-screen items-center justify-center bg-gray-100">
-    <div class="w-full max-w-md rounded-2xl bg-white p-6 shadow-lg">
-      <h2 class="mb-6 text-center text-2xl font-bold">Create an account</h2>
+  <div class="w-full max-w-lg rounded-2xl bg-white p-6 shadow-lg">
+    <h2 class="mb-6 text-center text-2xl font-bold">Create an account</h2>
 
-      <form @submit.prevent="handleSignup" class="space-y-4">
-        <InputUI
-          v-model="name"
-          label="Name"
-          placeholder="Your full name"
-          :error="errorField === 'name' ? errorMessage : ''"
-        />
+    <form @submit.prevent="handleSignup" class="space-y-4">
+      <InputUI
+        v-model="name"
+        label="Name"
+        placeholder="Your full name"
+        :error="errorField === 'name' ? errorMessage : ''"
+      />
 
-        <InputUI
-          v-model="email"
-          label="Email"
-          type="email"
-          placeholder="you@example.com"
-          :error="errorField === 'email' ? errorMessage : ''"
-        />
+      <InputUI
+        v-model="email"
+        label="Email"
+        type="email"
+        placeholder="you@example.com"
+        :error="errorField === 'email' ? errorMessage : ''"
+      />
 
-        <InputUI
-          v-model="password"
-          label="Password"
-          type="password"
-          placeholder="••••••••"
-          :error="errorField === 'password' ? errorMessage : ''"
-        />
+      <InputUI
+        v-model="password"
+        label="Password"
+        type="password"
+        placeholder="••••••••"
+        :error="errorField === 'password' ? errorMessage : ''"
+      />
 
-        <ButtonUI type="submit" :loading="loading" class="w-full"> Sign Up </ButtonUI>
-      </form>
+      <ButtonUI type="submit" :loading="loading" class="w-full"> Sign Up </ButtonUI>
+    </form>
 
-      <p class="mt-4 text-center text-sm text-gray-600">
-        Already have an account?
-        <RouterLink to="/login" class="text-blue-600 hover:underline">Log in</RouterLink>
-      </p>
-    </div>
+    <p class="mt-4 text-center text-sm text-gray-600">
+      Already have an account?
+      <RouterLink to="/login" class="text-blue-600 hover:underline">Log in</RouterLink>
+    </p>
   </div>
 </template>
 

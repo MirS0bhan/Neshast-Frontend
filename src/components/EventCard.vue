@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
-
+import image from '@/assets/temp-thumb.svg'
 // Define the props for this component
 const props = defineProps({
   event: {
@@ -18,13 +18,13 @@ const props = defineProps({
   <div class="overflow-hidden transition-all duration-300 hover:shadow-lg bg-white rounded-lg">
     <div class="h-48 overflow-hidden">
       <img
-        :src="props.event.image || '/placeholder.svg'"
-        :alt="props.event.title"
+        :src="props.event.image || image"
+        :alt="props.event.name"
         class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
       />
     </div>
     <div class="p-4">
-      <h3 class="text-xl font-semibold">{{ props.event.title }}</h3>
+      <h3 class="text-xl font-semibold">{{ props.event.name }}</h3>
 
       <div class="text-gray-600 mt-2">
         <p>{{ props.event.date }} • {{ props.event.time }}</p>

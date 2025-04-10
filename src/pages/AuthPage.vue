@@ -1,8 +1,8 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-gray-100">
-    <div class="w-full max-w-lg bg-white rounded-2xl shadow-lg p-6">
+  <div class="min-h-screen flex items-center justify-center bg-[rgb(var(--color-primary))]">
+    <div class="w-full max-w-lg rounded-2xl p-6 max-h-10/12">
       <TabsRoot v-model="activeTab">
-        <TabsList class="grid grid-cols-2 mb-6">
+        <TabsList class=" bg-white grid grid-cols-2 mb-6 p-4 rounded-2xl">
           <TabsTrigger value="login">Login</TabsTrigger>
           <TabsTrigger value="signup">Sign Up</TabsTrigger>
         </TabsList>
@@ -21,6 +21,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import '@/assets/theme.css'
 
 // reka-ui Tabs
 import {
