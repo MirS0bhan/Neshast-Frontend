@@ -6,6 +6,7 @@ import {
   NavigationMenuItem,
   NavigationMenuTrigger,
   NavigationMenuContent,
+  Label,
 } from 'reka-ui'
 </script>
 
@@ -15,10 +16,10 @@ import {
     <div class="container mx-auto flex items-center justify-between px-4 py-4">
       <h1 class="text-gold text-2xl font-bold">ایونت‌هاب</h1>
       <NavigationMenuRoot>
-        <NavigationMenuList class="hidden space-x-6 md:flex">
+        <NavigationMenuList class="hidden space-x-6 md:flex" dir="rtl">
           <NavigationMenuItem>
-            <NavigationMenuTrigger class="hover:text-green text-gray-700">
-              خانه
+            <NavigationMenuTrigger class="hover:text-green text-center text-gray-700">
+              <Label>خانه</Label>
             </NavigationMenuTrigger>
             <NavigationMenuContent>
               <!-- محتوای خانه -->
@@ -26,7 +27,9 @@ import {
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuTrigger class="hover:text-green text-gray-700">
-              رویدادها
+              <RouterLink to="/events" class="hover:text-[rgb(var(--color-primary))]">
+                <Label>رویدادها</Label>
+              </RouterLink>
             </NavigationMenuTrigger>
             <NavigationMenuContent>
               <!-- محتوای رویدادها -->
@@ -35,7 +38,7 @@ import {
           <NavigationMenuItem>
             <NavigationMenuTrigger class="hover:text-green text-gray-700">
               <RouterLink to="/about" class="hover:text-[rgb(var(--color-gold))]">
-              درباره ما
+                <Label>درباره ما</Label>
               </RouterLink>
             </NavigationMenuTrigger>
             <NavigationMenuContent>
@@ -44,10 +47,10 @@ import {
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuTrigger class="hover:text-green text-gray-700">
-              تماس با ما
+              <Label>تماس با ما</Label>
             </NavigationMenuTrigger>
             <NavigationMenuContent>
-              <!-- محتوای تماس با ما -->
+              <!-- <p>dsafdsaf</p> -->
             </NavigationMenuContent>
           </NavigationMenuItem>
         </NavigationMenuList>
