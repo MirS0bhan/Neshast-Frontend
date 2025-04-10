@@ -3,12 +3,18 @@ import HomePage from '@/pages/HomePage.vue'
 import AboutPage from '@/pages/AboutPage.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import AuthPage from '@/pages/AuthPage.vue'
+import Page404 from '@/pages/404Page.vue'
+import DashboardPage from '@/pages/DashboardPage.vue'
 
 const routes = [
   { path: '/', component: HomePage },
   { path: '/auth/login', component: AuthPage },
   { path: '/auth/signup', component: AuthPage },
+  
+  { path: '/dashboard', component: DashboardPage },
+
   { path: '/about', component: AboutPage },
+  { path: '/:pathMatch(.*)*', component: Page404 },
 ]
 
 const router = createRouter({
