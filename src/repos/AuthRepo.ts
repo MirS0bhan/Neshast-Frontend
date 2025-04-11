@@ -1,37 +1,37 @@
-// src/repositories/AuthRepo.ts
-import api from '@/plugins/axios'
+import type {TokenObtainPair, UserRegistration} from '@/api'
 
-const TOKEN_KEY = 'token' 
+import {
+  Configuration,
+  UsersApi, // or AuthApi, depending on your codegen
+} from '@/api'
+import apiInstance from '@/plugins/axios'
 
-export default {
-  async login(payload: { email: string; password: string }) {
-    const { data } = await api.post('/auth/login', payload)
-    if (data.token) {
-      localStorage.setItem(TOKEN_KEY, data.token)
-    }
-    return data
+const config = new Configuration()
+const usersApi = new UsersApi(config, config.basePath, apiInstance)
+
+export const AuthRepo = {
+  signup: async (payload: UserRegistration) => {
+    const response = await usersApi.usersRegisterCreate(payload)
+    return response.data
   },
 
-  async register(payload: { name: string; email: string; password: string }) {
-    const { data } = await api.post('/auth/register', payload)
-    return data
+  login: async (body: TokenObtainPair) => {
+    const response = await usersApi.usersAuthTokenCreate(body)
+    const tokens = response.data
+    // Save tokens to localStorage or pinia store here if you want
+    return tokens
   },
 
-  async logout() {
-    try {
-      await api.post('/auth/logout')
-    } catch (e) {
-      console.warn('Server-side logout failed:', e)
-    } finally {
-      localStorage.removeItem(TOKEN_KEY)
-    }
-  },
+  // refresh: async (refreshToken: string) => {
+  //   const response = await usersApi.({
+  //     tokenRefreshRequest: { refresh: refreshToken }
+  //   })
+  //   return response.data
+  // },
 
-  getToken() {
-    return localStorage.getItem(TOKEN_KEY)
-  },
-
-  isAuthenticated(): boolean {
-    return !!localStorage.getItem(TOKEN_KEY)
-  },
+  logout: () => {
+    // Just clear storage, no API call needed
+    localStorage.removeItem('accessToken')
+    localStorage.removeItem('refreshToken')
+  }
 }

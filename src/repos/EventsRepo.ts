@@ -1,21 +1,13 @@
-import api from '@/plugins/axios'
+// src/repos/EventsRepo.ts
+import { Configuration, EventsApi } from '@/api'
+import apiInstance from '@/plugins/axios'
 
-interface Event {
-  id: number;
-  name: string;
-  date: string;
+const config = new Configuration()
+const eventsApi = new EventsApi(config, config.basePath, apiInstance)
+
+const EventsRepo = {
+  getAllEvents: () => eventsApi.eventsList(),
+  getAllFeatured: () => eventsApi.eventsFeatured(),
 }
 
-export default {
-  async getAllUpcomings() {
-    // const { data } = await api.get('/events/upcoming')
-    const data: Event[] = [{ id: 1, name: 'Event 1', date: '2023-10-01' }, { id: 2, name: 'Event 2', date: '2023-10-02' },{ id: 2, name: 'Event 2', date: '2023-10-02' },{ id: 2, name: 'Event 2', date: '2023-10-02' }];
-    return data
-  },
-
-  async getPublicEvents(){
-    // const { data } = await api.get('/events/upcoming')
-    const data: Event[] = [{ id: 1, name: 'Event 1', date: '2023-10-01' }, { id: 2, name: 'Event 2', date: '2023-10-02' },{ id: 2, name: 'Event 2', date: '2023-10-02' },{ id: 2, name: 'Event 2', date: '2023-10-02' }];
-    return data
-  }
-}
+export default EventsRepo

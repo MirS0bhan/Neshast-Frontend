@@ -3,8 +3,8 @@
     <div class="max-h-10/12 w-full max-w-lg rounded-2xl p-6">
       <TabsRoot v-model="activeTab">
         <TabsList class="mb-6 grid grid-cols-2 rounded-2xl bg-white p-4">
-          <TabsTrigger value="login">Login</TabsTrigger>
-          <TabsTrigger value="signup">Sign Up</TabsTrigger>
+          <TabsTrigger value="login">ورود</TabsTrigger>
+          <TabsTrigger value="signup">عضویت</TabsTrigger>
         </TabsList>
 
         <TabsContent value="login">

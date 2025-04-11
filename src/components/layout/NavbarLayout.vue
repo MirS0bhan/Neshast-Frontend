@@ -19,7 +19,9 @@ import {
         <NavigationMenuList class="hidden space-x-6 md:flex" dir="rtl">
           <NavigationMenuItem>
             <NavigationMenuTrigger class="hover:text-green text-center text-gray-700">
-              <Label>خانه</Label>
+              <RouterLink to="/" class="hover:text-[rgb(var(--color-primary))]">
+                <Label>خانه</Label>
+              </RouterLink>
             </NavigationMenuTrigger>
             <NavigationMenuContent>
               <!-- محتوای خانه -->
