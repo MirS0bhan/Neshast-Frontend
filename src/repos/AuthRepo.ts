@@ -15,6 +15,15 @@ export const AuthRepo = {
     return response.data
   },
 
+  verify: async (code: string) => {
+    const response = await usersApi.usersEmailVerifyRead(code)
+    if(response.status === 200){
+      console.log("user has verified")
+      return true;
+    }
+
+  },
+
   login: async (body: TokenObtainPair) => {
     const response = await usersApi.usersAuthTokenCreate(body)
     const tokens = response.data

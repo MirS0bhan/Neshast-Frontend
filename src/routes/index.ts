@@ -6,6 +6,7 @@ import AuthPage from '@/pages/AuthPage.vue'
 import Page404 from '@/pages/404Page.vue'
 import DashboardPage from '@/pages/DashboardPage.vue'
 import EventsIndexPage from '@/pages/EventsIndexPage.vue'
+import VerifyPage from '@/pages/VerifyPage.vue'
 
 const routes = [
   { path: '/', component: HomePage },
@@ -14,6 +15,7 @@ const routes = [
 
   { path: '/auth/login', component: AuthPage },
   { path: '/auth/signup', component: AuthPage },
+  { path: '/auth/verify', component: VerifyPage },
 
   { path: '/dashboard', component: DashboardPage },
 
