@@ -1,30 +1,30 @@
 <template>
   <div class="w-full max-w-lg rounded-2xl bg-white p-6 shadow-lg">
-    <h2 class="mb-6 text-center text-2xl font-bold">Login to your account</h2>
+    <h2 class="mb-6 text-center text-2xl font-bold">وارد حساب خود شوید</h2>
 
-    <form @submit.prevent="handleLogin" class="space-y-4">
+    <form @submit.prevent="handleLogin" class="space-y-4" dir="rtl">
       <InputUI
-        v-model="email"
-        label="Email"
-        type="email"
-        placeholder="you@example.com"
-        :error="errorField === 'email' ? errorMessage : ''"
+        v-model="username"
+        label="نام‌کاربری"
+        type="username"
+        placeholder="میسانو"
+        :error="errorField === 'username' ? errorMessage : ''"
       />
 
       <InputUI
         v-model="password"
-        label="Password"
+        label="رمز عبور"
         type="password"
         placeholder="••••••••"
         :error="errorField === 'password' ? errorMessage : ''"
       />
 
-      <ButtonUI :loading="loading" class="w-full" type="submit"> Login </ButtonUI>
+      <ButtonUI :loading="loading" class="w-full" type="submit"> ورود </ButtonUI>
     </form>
 
     <p class="mt-4 text-center text-sm text-gray-600">
-      Don’t have an account?
-      <RouterLink to="/register" class="text-blue-600 hover:underline">Sign up</RouterLink>
+      حسابی ندارید؟
+      <RouterLink to="/register" class="text-blue-600 hover:underline">عضویت</RouterLink>
     </p>
   </div>
 </template>
@@ -32,12 +32,14 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import AuthRepo from '@/repos/AuthRepo'
+import type {TokenObtainPair} from '@/api'
+
+import { AuthRepo }  from '@/repos/AuthRepo'
 
 import InputUI from '#/ui/InputUI.vue'
 import ButtonUI from '#/ui/ButtonUI.vue'
 
-const email = ref('')
+const username = ref('')
 const password = ref('')
 const loading = ref(false)
 const errorMessage = ref('')
@@ -50,10 +52,12 @@ const handleLogin = async () => {
   errorField.value = ''
 
   try {
-    const response = await AuthRepo.login({
-      email: email.value,
-      password: password.value,
-    })
+    const top: TokenObtainPair = {
+    username: username.value,
+    password: password.value,
+};
+
+    const response = await AuthRepo.login(top)
 
     console.log('Login successful:', response)
     router.push('/dashboard')
@@ -61,8 +65,8 @@ const handleLogin = async () => {
     const message = err?.response?.data?.message || 'Login failed'
     errorMessage.value = message
 
-    if (message.toLowerCase().includes('email')) {
-      errorField.value = 'email'
+    if (message.toLowerCase().includes('username')) {
+      errorField.value = 'username'
     } else if (message.toLowerCase().includes('password')) {
       errorField.value = 'password'
     }

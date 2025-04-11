@@ -4,25 +4,16 @@ import BasePublicPage from './BasePublicPage.vue';
 import UpcomingsLayout from '@/components/layout/UpcomingLayout.vue';
 import NewsletterLayout from '@/components/layout/NewsletterLayout.vue';
 
-import EventRepo from '@/repos/EventsRepo'
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue'
+import EventsRepo from '@/repos/EventsRepo'
+import type { Event } from '@/api/models'
 
-interface Event {
-  id: number;
-  name: string;
-  date: string;
-}
-// Using .then() to handle the promise and assign it to a constant
-const events = ref({}); // Declare a variable outside
+const events = ref<Event[]>([])
 
-EventRepo.getAllUpcomings()
-  .then(data => {
-    events.value = data; // Assign the resolved data to the variable
-    console.log(events); // Now events contains the resolved data
-  })
-  .catch(error => {
-    console.error('Error fetching events:', error);
-  });
+onMounted(async () => {
+  const res = await EventsRepo.getAllFeatured()
+  events.value = res.data
+})
 </script>
 
 <template>

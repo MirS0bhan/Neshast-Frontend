@@ -1,17 +1,13 @@
 <script setup lang="ts">
 // import { defineProps } from 'vue';
 import EventCard from '#/EventCard.vue';
+import type { EventI } from '@/api/models'
 import '@/assets/theme.css'
 
-interface Event {
-  id: number;
-  name: string;
-  date: string;
-}
 
 const props = defineProps({
   events: {
-    type: Array<Event>,
+    type: Array<EventI>,
     required: true,
   },
 });
@@ -28,6 +24,7 @@ const props = defineProps({
         :event="event"
         :index="index"
       />
+
     </div>
   </section>
 </template>
