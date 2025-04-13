@@ -12,17 +12,18 @@
  * Do not edit the class manually.
  */
 
+import { Organization } from './organization';
  /**
  * 
  *
  * @export
- * @interface User
+ * @interface UserME
  */
-export interface User {
+export interface UserME {
 
     /**
      * @type {number}
-     * @memberof User
+     * @memberof UserME
      */
     id?: number;
 
@@ -30,31 +31,31 @@ export interface User {
      * Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
      *
      * @type {string}
-     * @memberof User
+     * @memberof UserME
      */
     username: string;
 
     /**
      * @type {string}
-     * @memberof User
+     * @memberof UserME
      */
     email: string;
 
     /**
      * @type {string}
-     * @memberof User
+     * @memberof UserME
      */
     first_name?: string;
 
     /**
      * @type {string}
-     * @memberof User
+     * @memberof UserME
      */
     last_name?: string;
 
     /**
-     * @type {Array<number>}
-     * @memberof User
+     * @type {Array<Organization>}
+     * @memberof UserME
      */
-    organizations: Array<number>;
+    organizations?: Array<Organization>;
 }

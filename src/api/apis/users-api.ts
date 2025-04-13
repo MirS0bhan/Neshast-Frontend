@@ -22,8 +22,12 @@ import { InlineResponse400 } from '../models';
 import { InlineResponse4001 } from '../models';
 import { PasswordReset } from '../models';
 import { PasswordResetRequest } from '../models';
+import { Ticket } from '../models';
 import { TokenObtainPair } from '../models';
+import { TokenObtainPairResponse } from '../models';
 import { TokenRefresh } from '../models';
+import { TokenRefreshResponse } from '../models';
+import { UserME } from '../models';
 import { UserRegistration } from '../models';
 /**
  * UsersApi - axios parameter creator
@@ -32,7 +36,7 @@ import { UserRegistration } from '../models';
 export const UsersApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Takes a set of user credentials and returns an access and refresh JSON web token pair to prove the authentication of those credentials.
+         * 
          * @param {TokenObtainPair} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -82,7 +86,7 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Takes a refresh type JSON web token and returns an access type JSON web token if the refresh token is valid.
+         * 
          * @param {TokenRefresh} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -144,6 +148,47 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             }
             const localVarPath = `/users/email/verify/{token}/`
                 .replace(`{${"token"}}`, encodeURIComponent(String(token)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            if (configuration && configuration.apiKey) {
+                const localVarApiKeyValue = typeof configuration.apiKey === 'function'
+                    ? await configuration.apiKey("Authorization")
+                    : await configuration.apiKey;
+                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersMeList: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/users/me/`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -328,6 +373,47 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersTicketsList: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/users/tickets/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            if (configuration && configuration.apiKey) {
+                const localVarApiKeyValue = typeof configuration.apiKey === 'function'
+                    ? await configuration.apiKey("Authorization")
+                    : await configuration.apiKey;
+                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -338,12 +424,12 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
 export const UsersApiFp = function(configuration?: Configuration) {
     return {
         /**
-         * Takes a set of user credentials and returns an access and refresh JSON web token pair to prove the authentication of those credentials.
+         * 
          * @param {TokenObtainPair} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usersAuthTokenCreate(body: TokenObtainPair, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<TokenObtainPair>>> {
+        async usersAuthTokenCreate(body: TokenObtainPair, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<TokenObtainPairResponse>>> {
             const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).usersAuthTokenCreate(body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -351,12 +437,12 @@ export const UsersApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * Takes a refresh type JSON web token and returns an access type JSON web token if the refresh token is valid.
+         * 
          * @param {TokenRefresh} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usersAuthTokenRefreshCreate(body: TokenRefresh, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<TokenRefresh>>> {
+        async usersAuthTokenRefreshCreate(body: TokenRefresh, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<TokenRefreshResponse>>> {
             const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).usersAuthTokenRefreshCreate(body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -371,6 +457,18 @@ export const UsersApiFp = function(configuration?: Configuration) {
          */
         async usersEmailVerifyRead(token: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<InlineResponse200>>> {
             const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).usersEmailVerifyRead(token, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async usersMeList(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<UserME>>> {
+            const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).usersMeList(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -415,6 +513,18 @@ export const UsersApiFp = function(configuration?: Configuration) {
                 return axios.request(axiosRequestArgs);
             };
         },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async usersTicketsList(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Ticket>>>> {
+            const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).usersTicketsList(options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
     }
 };
 
@@ -425,21 +535,21 @@ export const UsersApiFp = function(configuration?: Configuration) {
 export const UsersApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     return {
         /**
-         * Takes a set of user credentials and returns an access and refresh JSON web token pair to prove the authentication of those credentials.
+         * 
          * @param {TokenObtainPair} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usersAuthTokenCreate(body: TokenObtainPair, options?: AxiosRequestConfig): Promise<AxiosResponse<TokenObtainPair>> {
+        async usersAuthTokenCreate(body: TokenObtainPair, options?: AxiosRequestConfig): Promise<AxiosResponse<TokenObtainPairResponse>> {
             return UsersApiFp(configuration).usersAuthTokenCreate(body, options).then((request) => request(axios, basePath));
         },
         /**
-         * Takes a refresh type JSON web token and returns an access type JSON web token if the refresh token is valid.
+         * 
          * @param {TokenRefresh} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usersAuthTokenRefreshCreate(body: TokenRefresh, options?: AxiosRequestConfig): Promise<AxiosResponse<TokenRefresh>> {
+        async usersAuthTokenRefreshCreate(body: TokenRefresh, options?: AxiosRequestConfig): Promise<AxiosResponse<TokenRefreshResponse>> {
             return UsersApiFp(configuration).usersAuthTokenRefreshCreate(body, options).then((request) => request(axios, basePath));
         },
         /**
@@ -450,6 +560,14 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          */
         async usersEmailVerifyRead(token: string, options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse200>> {
             return UsersApiFp(configuration).usersEmailVerifyRead(token, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async usersMeList(options?: AxiosRequestConfig): Promise<AxiosResponse<UserME>> {
+            return UsersApiFp(configuration).usersMeList(options).then((request) => request(axios, basePath));
         },
         /**
          * Password reset view
@@ -478,6 +596,14 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
         async usersRegisterCreate(body: UserRegistration, options?: AxiosRequestConfig): Promise<AxiosResponse<UserRegistration>> {
             return UsersApiFp(configuration).usersRegisterCreate(body, options).then((request) => request(axios, basePath));
         },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async usersTicketsList(options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Ticket>>> {
+            return UsersApiFp(configuration).usersTicketsList(options).then((request) => request(axios, basePath));
+        },
     };
 };
 
@@ -489,23 +615,23 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
  */
 export class UsersApi extends BaseAPI {
     /**
-     * Takes a set of user credentials and returns an access and refresh JSON web token pair to prove the authentication of those credentials.
+     * 
      * @param {TokenObtainPair} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    public async usersAuthTokenCreate(body: TokenObtainPair, options?: AxiosRequestConfig) : Promise<AxiosResponse<TokenObtainPair>> {
+    public async usersAuthTokenCreate(body: TokenObtainPair, options?: AxiosRequestConfig) : Promise<AxiosResponse<TokenObtainPairResponse>> {
         return UsersApiFp(this.configuration).usersAuthTokenCreate(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * Takes a refresh type JSON web token and returns an access type JSON web token if the refresh token is valid.
+     * 
      * @param {TokenRefresh} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    public async usersAuthTokenRefreshCreate(body: TokenRefresh, options?: AxiosRequestConfig) : Promise<AxiosResponse<TokenRefresh>> {
+    public async usersAuthTokenRefreshCreate(body: TokenRefresh, options?: AxiosRequestConfig) : Promise<AxiosResponse<TokenRefreshResponse>> {
         return UsersApiFp(this.configuration).usersAuthTokenRefreshCreate(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
@@ -517,6 +643,15 @@ export class UsersApi extends BaseAPI {
      */
     public async usersEmailVerifyRead(token: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<InlineResponse200>> {
         return UsersApiFp(this.configuration).usersEmailVerifyRead(token, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    public async usersMeList(options?: AxiosRequestConfig) : Promise<AxiosResponse<UserME>> {
+        return UsersApiFp(this.configuration).usersMeList(options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Password reset view
@@ -547,5 +682,14 @@ export class UsersApi extends BaseAPI {
      */
     public async usersRegisterCreate(body: UserRegistration, options?: AxiosRequestConfig) : Promise<AxiosResponse<UserRegistration>> {
         return UsersApiFp(this.configuration).usersRegisterCreate(body, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    public async usersTicketsList(options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Ticket>>> {
+        return UsersApiFp(this.configuration).usersTicketsList(options).then((request) => request(this.axios, this.basePath));
     }
 }

@@ -39,4 +39,10 @@ export interface UserRegistration {
      * @memberof UserRegistration
      */
     password: string;
+
+    /**
+     * @type {string}
+     * @memberof UserRegistration
+     */
+    refresh_token?: string;
 }
