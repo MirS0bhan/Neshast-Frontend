@@ -1,13 +1,9 @@
 <script setup lang="ts">
 // import { defineProps } from 'vue';
 import EventCard from '#/EventCard.vue';
+import { Event } from '@/api';
 import '@/assets/theme.css'
 
-interface Event {
-  id: number;
-  name: string;
-  date: string;
-}
 
 const props = defineProps({
   events: {

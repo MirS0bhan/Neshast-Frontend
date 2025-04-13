@@ -3,7 +3,7 @@ import '@/assets/theme.css'
 </script>
 
 <template>
-  <footer class="bg-[rgb(var(--color-primary)/0.8)] py-12 text-white">
+  <footer class="bg-[rgb(var(--color-primary-dark))] py-12 text-white">
     <div class="container mx-auto px-4">
       <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
         <div>

@@ -8,6 +8,13 @@ import {
   NavigationMenuContent,
   Label,
 } from 'reka-ui'
+import ProfileLayout from './ProfileLayout.vue'
+import { useUserStore } from '@/stores/user'
+// import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+// import { byPrefixAndName } from '@awesome.me/kit-KIT_CODE/icons'
+
+
+const userStore = useUserStore()
 </script>
 
 <template>
@@ -58,12 +65,16 @@ import {
         </NavigationMenuList>
       </NavigationMenuRoot>
       <div class="space-x-6">
-        <router-link to="/auth/signup">
-          <ButtonUI variant="primary" size="md"> ثبت‌نام </ButtonUI>
-        </router-link>
-        <router-link to="/auth/login">
-          <ButtonUI variant="outline" size="md"> ورود </ButtonUI>
-        </router-link>
+        <div v-if="!userStore.isLoggedIn">
+          <router-link to="/auth/signup">
+            <ButtonUI variant="primary" size="md"> ثبت‌نام </ButtonUI>
+          </router-link>
+          <router-link to="/auth/login">
+            <ButtonUI variant="outline" size="md"> ورود </ButtonUI>
+          </router-link>
+        </div>
+        <ProfileLayout v-else/>
+        <!-- <FontAwesomeIcon :icon="byPrefixAndName.fas['house']" class="bg-black w-8 h-8" /> -->
       </div>
     </div>
   </header>

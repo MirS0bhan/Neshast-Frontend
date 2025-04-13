@@ -1,13 +1,13 @@
 <script setup lang="ts">
 // import { defineProps } from 'vue';
 import EventCard from '#/EventCard.vue';
-import type { EventI } from '@/api/models'
+import type { Event } from '@/api/models'
 import '@/assets/theme.css'
 
 
 const props = defineProps({
   events: {
-    type: Array<EventI>,
+    type: Array<Event>,
     required: true,
   },
 });

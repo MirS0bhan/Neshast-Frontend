@@ -8,6 +8,9 @@
 </template>
 
 <script setup lang="ts">
+import { TabsTrigger } from 'reka-ui';
+
+
 defineProps({
   title: {
     type: String,
