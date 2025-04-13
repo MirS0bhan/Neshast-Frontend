@@ -1,6 +1,7 @@
 /* theme.css */
 :root {
-  --color-primary: 59 130 246;
+  --color-primary: 72, 166, 167;
+  --color-primary-dark: 0, 106, 113;
   --color-secondary: 107 114 128;
   --color-danger: 239 68 68;
 }
