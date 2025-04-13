@@ -1,29 +1,33 @@
 // src/repositories/UserRepo.ts
-import api from '@/plugins/axios'
+import { Configuration, UserME, UsersApi } from '@/api'
+
+import { useUserStore } from '@/stores/user'
+
+import {config, apiInstance} from '@/plugins/axios'
+
+const userApi = new UsersApi(config, config.basePath, apiInstance)
+
+
 
 export default {
-  async getAll() {
-    const { data } = await api.get('/users')
-    return data
+
+  async getMe() {
+    const userStore = useUserStore()
+
+    const userData = userStore.user
+    console.log(userData)
+    console.log("get me")
+
+    if( userData !== null) {
+      return userData
+    } else {
+      const response = await userApi.usersMeList()
+      userStore.user = response.data
+      return response.data
+    }
   },
 
-  async getById(id: string | number) {
-    const { data } = await api.get(`/users/${id}`)
-    return data
-  },
-
-  async create(payload: any) {
-    const { data } = await api.post('/users', payload)
-    return data
-  },
-
-  async update(id: string | number, payload: any) {
-    const { data } = await api.put(`/users/${id}`, payload)
-    return data
-  },
-
-  async delete(id: string | number) {
-    const { data } = await api.delete(`/users/${id}`)
-    return data
-  },
+  async getUserTickets() {
+    return await userApi.usersTicketsList()
+  }
 }

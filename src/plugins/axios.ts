@@ -1,5 +1,8 @@
 // src/plugins/axios.ts
+import { Configuration } from '@/api'
+import { useUserStore } from '@/stores/user'
 import axios from 'axios'
+import { useRouter } from 'vue-router'
 
 const apiInstance = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL || 'https://api.neshast.net',
@@ -11,7 +14,8 @@ const apiInstance = axios.create({
 
 // 🔐 Add auth token if available
 apiInstance.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token') || ''
+  const userStore = useUserStore()
+  const token = userStore.accessToken || ''
   if (token) {
     config.headers.Authorization = `Bearer ${token}`
   }
@@ -23,10 +27,11 @@ apiInstance.interceptors.response.use(
   (response) => response,
   (error) => {
     const status = error.response?.status
+    const route = useRouter()
 
     if (status === 401) {
-      // Handle unauthorized (e.g., redirect to login)
       console.warn('Unauthorized, redirecting to login...')
+      route.push('/auth/login')
     } else if (status >= 500) {
       console.error('Server error:', error.message)
     }
@@ -35,4 +40,6 @@ apiInstance.interceptors.response.use(
   }
 )
 
-export default apiInstance
+const config = new Configuration()
+
+export {config,apiInstance}
