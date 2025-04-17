@@ -1,9 +1,5 @@
 <template>
-  <button
-    :class="computedClasses"
-    :disabled="disabled || loading"
-    v-bind="$attrs"
-  >
+  <button :class="computedClasses" :disabled="disabled || loading" v-bind="$attrs">
     <span v-if="loading" class="mr-2 animate-spin">
       <slot name="spinner">
         <i class="ri-loader-4-line" />
@@ -29,12 +25,7 @@ const props = defineProps<{
   disabled?: boolean
 }>()
 
-const {
-  variant = 'primary',
-  size = 'md',
-  loading = false,
-  disabled = false,
-} = props
+const { variant = 'primary', size = 'md', loading = false, disabled = false } = props
 
 const baseClasses =
   'inline-flex items-center justify-center font-medium rounded-md transition duration-200 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed'
@@ -46,17 +37,14 @@ const sizeClasses = {
 }
 
 const variantClasses = {
-  primary: 'bg-[rgb(var(--color-primary))] text-white hover:bg-[rgb(var(--color-primary)/0.5)]',
-  secondary: 'bg-[rgb(var(--color-secondary))] text-white hover:bg-[rgb(var(--color-secondary)/0.8)]',
+  primary: 'bg-[rgb(var(--color-primary))] text-white hover:bg-[rgb(var(--color-primary),0.5)]',
+  secondary:
+    'bg-[rgb(var(--color-secondary))] text-white hover:bg-[rgb(var(--color-secondary)/0.8)]',
   danger: 'bg-[rgb(var(--color-danger))] text-white hover:bg-[rgb(var(--color-danger)/0.8)]',
   outline: 'border border-gray-300 text-gray-800 hover:bg-gray-100',
 }
 
 const computedClasses = computed(() => {
-  return [
-    baseClasses,
-    sizeClasses[size],
-    variantClasses[variant],
-  ].join(' ')
+  return [baseClasses, sizeClasses[size], variantClasses[variant]].join(' ')
 })
 </script>
