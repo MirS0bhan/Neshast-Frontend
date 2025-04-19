@@ -1,6 +1,6 @@
 <template>
   <BasePublicPage>
-    <div class="flex min-w-max min-h-44 items-center justify-center bg-[rgb(var(--color-primary))]">
+    <div class="flex min-h-44 min-w-max items-center justify-center bg-[rgb(var(--color-primary))]">
       <div class="m-7 max-w-5xl min-w-3xl rounded-2xl bg-white p-7">
         <form @submit.prevent="submit" class="space-y-4">
           <InputUI v-model="form.name" label="نام سازمان" required />
@@ -31,10 +31,11 @@ import { ref } from 'vue'
 import BasePublicPage from './BasePublicPage.vue'
 import ButtonUI from '@/components/ui/ButtonUI.vue'
 import InputUI from '@/components/ui/InputUI.vue'
-import type { Organization } from '@/api'
+import type { OrganizationCreate } from '@/api'
 import '@/assets/theme.css'
+import OrgRepo from '@/repos/OrgRepo'
 
-const form = ref<Organization>({
+const form = ref<OrganizationCreate>({
   name: '',
   description: '',
   email: '',
@@ -44,6 +45,6 @@ const form = ref<Organization>({
 
 function submit() {
   console.log('اطلاعات فرم ارسال شد:', form.value)
-  // اینجا می‌تونید اطلاعات رو به API ارسال کنید
+  OrgRepo.newOrganization(form.value)
 }
 </script>

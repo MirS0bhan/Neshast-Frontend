@@ -9,11 +9,13 @@ import VerifyPage from '@/pages/VerifyPage.vue'
 import UserDashboardPage from '@/pages/UserDashboardPage.vue'
 import OrganizationDashboard from '@/pages/OrganizationDashboard.vue'
 import NewOrganizationPage from '@/pages/NewOrganizationPage.vue'
+import NewEventPage from '@/pages/NewEventPage.vue'
 
 
 const routes = [
   { path: '/', component: HomePage },
   { path: '/events', component: EventsIndexPage },
+  { path: '/events/new', component: NewEventPage },
 
   { path: '/auth/login', component: AuthPage },
   { path: '/auth/signup', component: AuthPage },
