@@ -17,6 +17,8 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { Organization } from '../models';
+import { OrganizationCreate } from '../models';
 /**
  * OrganizationApi - axios parameter creator
  * @export
@@ -25,10 +27,15 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
     return {
         /**
          * Create a new organization.
+         * @param {OrganizationCreate} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        organizationCreate: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        organizationCreate: async (body: OrganizationCreate, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new RequiredError('body','Required parameter body was null or undefined when calling organizationCreate.');
+            }
             const localVarPath = `/organization/`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -48,6 +55,8 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
                 localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -58,6 +67,8 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -148,10 +159,15 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * Update an organization.
+         * @param {Organization} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        organizationPartialUpdate: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        organizationPartialUpdate: async (body: Organization, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new RequiredError('body','Required parameter body was null or undefined when calling organizationPartialUpdate.');
+            }
             const localVarPath = `/organization/`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -171,6 +187,8 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
                 localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -181,6 +199,8 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -245,11 +265,12 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
     return {
         /**
          * Create a new organization.
+         * @param {OrganizationCreate} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async organizationCreate(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
-            const localVarAxiosArgs = await OrganizationApiAxiosParamCreator(configuration).organizationCreate(options);
+        async organizationCreate(body: OrganizationCreate, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<OrganizationCreate>>> {
+            const localVarAxiosArgs = await OrganizationApiAxiosParamCreator(configuration).organizationCreate(body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -272,7 +293,7 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async organizationList(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+        async organizationList(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Organization>>>> {
             const localVarAxiosArgs = await OrganizationApiAxiosParamCreator(configuration).organizationList(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -281,11 +302,12 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
         },
         /**
          * Update an organization.
+         * @param {Organization} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async organizationPartialUpdate(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
-            const localVarAxiosArgs = await OrganizationApiAxiosParamCreator(configuration).organizationPartialUpdate(options);
+        async organizationPartialUpdate(body: Organization, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Organization>>> {
+            const localVarAxiosArgs = await OrganizationApiAxiosParamCreator(configuration).organizationPartialUpdate(body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -315,11 +337,12 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
     return {
         /**
          * Create a new organization.
+         * @param {OrganizationCreate} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async organizationCreate(options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
-            return OrganizationApiFp(configuration).organizationCreate(options).then((request) => request(axios, basePath));
+        async organizationCreate(body: OrganizationCreate, options?: AxiosRequestConfig): Promise<AxiosResponse<OrganizationCreate>> {
+            return OrganizationApiFp(configuration).organizationCreate(body, options).then((request) => request(axios, basePath));
         },
         /**
          * Delete an organization.
@@ -334,16 +357,17 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async organizationList(options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+        async organizationList(options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Organization>>> {
             return OrganizationApiFp(configuration).organizationList(options).then((request) => request(axios, basePath));
         },
         /**
          * Update an organization.
+         * @param {Organization} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async organizationPartialUpdate(options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
-            return OrganizationApiFp(configuration).organizationPartialUpdate(options).then((request) => request(axios, basePath));
+        async organizationPartialUpdate(body: Organization, options?: AxiosRequestConfig): Promise<AxiosResponse<Organization>> {
+            return OrganizationApiFp(configuration).organizationPartialUpdate(body, options).then((request) => request(axios, basePath));
         },
         /**
          * Retrieve a specific organization by ID
@@ -366,12 +390,13 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
 export class OrganizationApi extends BaseAPI {
     /**
      * Create a new organization.
+     * @param {OrganizationCreate} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OrganizationApi
      */
-    public async organizationCreate(options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
-        return OrganizationApiFp(this.configuration).organizationCreate(options).then((request) => request(this.axios, this.basePath));
+    public async organizationCreate(body: OrganizationCreate, options?: AxiosRequestConfig) : Promise<AxiosResponse<OrganizationCreate>> {
+        return OrganizationApiFp(this.configuration).organizationCreate(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Delete an organization.
@@ -388,17 +413,18 @@ export class OrganizationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OrganizationApi
      */
-    public async organizationList(options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+    public async organizationList(options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Organization>>> {
         return OrganizationApiFp(this.configuration).organizationList(options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Update an organization.
+     * @param {Organization} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OrganizationApi
      */
-    public async organizationPartialUpdate(options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
-        return OrganizationApiFp(this.configuration).organizationPartialUpdate(options).then((request) => request(this.axios, this.basePath));
+    public async organizationPartialUpdate(body: Organization, options?: AxiosRequestConfig) : Promise<AxiosResponse<Organization>> {
+        return OrganizationApiFp(this.configuration).organizationPartialUpdate(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Retrieve a specific organization by ID

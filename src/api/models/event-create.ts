@@ -12,6 +12,7 @@
  * Do not edit the class manually.
  */
 
+import { TicketType } from './ticket-type';
  /**
  * 
  *
@@ -39,6 +40,18 @@ export interface EventCreate {
     organization: number;
 
     /**
+     * @type {string}
+     * @memberof EventCreate
+     */
+    image?: string | null;
+
+    /**
+     * @type {number}
+     * @memberof EventCreate
+     */
+    category?: number | null;
+
+    /**
      * @type {Date}
      * @memberof EventCreate
      */
@@ -55,4 +68,10 @@ export interface EventCreate {
      * @memberof EventCreate
      */
     location: string;
+
+    /**
+     * @type {Array<TicketType>}
+     * @memberof EventCreate
+     */
+    ticket_types: Array<TicketType>;
 }
