@@ -58,4 +58,10 @@ export interface UserME {
      * @memberof UserME
      */
     organizations?: Array<Organization>;
+
+    /**
+     * @type {string}
+     * @memberof UserME
+     */
+    profile_picture?: string;
 }
