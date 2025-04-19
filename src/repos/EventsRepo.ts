@@ -7,6 +7,7 @@ const eventsApi = new EventsApi(config, config.basePath, apiInstance)
 
 const EventsRepo = {
   getAllEvents: () => eventsApi.eventsList(),
+  // newEvent: () => eventsApi.eventsCreate(),
   getAllFeatured: () => eventsApi.eventsFeatured(),
 }
 

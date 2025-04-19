@@ -1,24 +1,21 @@
 // src/repositories/UserRepo.ts
-import { Configuration, UserME, UsersApi } from '@/api'
+import { UsersApi } from '@/api'
 
 import { useUserStore } from '@/stores/user'
 
-import {config, apiInstance} from '@/plugins/axios'
+import { config, apiInstance } from '@/plugins/axios'
 
 const userApi = new UsersApi(config, config.basePath, apiInstance)
 
-
-
 export default {
-
   async getMe() {
     const userStore = useUserStore()
 
     const userData = userStore.user
     console.log(userData)
-    console.log("get me")
+    console.log('get me')
 
-    if( userData !== null) {
+    if (userData !== null) {
       return userData
     } else {
       const response = await userApi.usersMeList()
@@ -27,7 +24,12 @@ export default {
     }
   },
 
+  async getOrganization() {
+    return (await this.getMe()).organizations
+  },
+
   async getUserTickets() {
-    return await userApi.usersTicketsList()
-  }
+    const response = await userApi.usersTicketsList()
+    return response.data
+  },
 }
