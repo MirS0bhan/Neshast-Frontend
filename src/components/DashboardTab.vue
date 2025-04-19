@@ -1,5 +1,5 @@
 <template>
-  <TabsTrigger value="a" class="flex items-center gap-4 p-4 bg-white rounded-2xl min-w-max ">
+  <TabsTrigger :value="value" class="flex items-center gap-4 p-4 bg-white rounded-2xl min-w-max ">
     <component :is="icon" class="w-6 h-6 text-primary-500" />
     <h2 class="text-xl font-semibold text-gray-800">
       {{ title }}

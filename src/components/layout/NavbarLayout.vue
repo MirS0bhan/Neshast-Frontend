@@ -10,9 +10,9 @@ import {
 } from 'reka-ui'
 import ProfileLayout from './ProfileLayout.vue'
 import { useUserStore } from '@/stores/user'
+
 // import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 // import { byPrefixAndName } from '@awesome.me/kit-KIT_CODE/icons'
-
 
 const userStore = useUserStore()
 </script>
@@ -20,7 +20,7 @@ const userStore = useUserStore()
 <template>
   <!-- Header -->
   <header class="bg-white shadow-sm">
-    <div class="container mx-auto flex items-center justify-between px-4 py-4">
+    <div class="container mx-auto flex items-center justify-between px-2 py-2">
       <h1 class="text-gold text-2xl font-bold">ایونت‌هاب</h1>
       <NavigationMenuRoot>
         <NavigationMenuList class="hidden space-x-6 md:flex" dir="rtl">
@@ -64,16 +64,17 @@ const userStore = useUserStore()
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenuRoot>
-      <div class="space-x-6">
-        <div v-if="!userStore.isLoggedIn">
+      <div>
+        <div class="space-x-6" v-if="!userStore.isLoggedIn">
           <router-link to="/auth/signup">
             <ButtonUI variant="primary" size="md"> ثبت‌نام </ButtonUI>
           </router-link>
+
           <router-link to="/auth/login">
             <ButtonUI variant="outline" size="md"> ورود </ButtonUI>
           </router-link>
         </div>
-        <ProfileLayout v-else/>
+        <ProfileLayout v-else />
         <!-- <FontAwesomeIcon :icon="byPrefixAndName.fas['house']" class="bg-black w-8 h-8" /> -->
       </div>
     </div>
